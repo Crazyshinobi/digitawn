@@ -1,0 +1,247 @@
+/* ═══════════════════════════════════════════════
+   Core Service Offerings Section
+═══════════════════════════════════════════════ */
+
+.core-services {
+  background: var(--bg-white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Background blobs ── */
+.cs-blob {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.cs-blob-left {
+  top: -80px;
+  left: -160px;
+  background: radial-gradient(circle, rgba(139, 195, 74, 0.18) 0%, transparent 70%);
+}
+.cs-blob-right {
+  bottom: -100px;
+  right: -160px;
+  background: radial-gradient(circle, rgba(255, 213, 79, 0.18) 0%, transparent 70%);
+}
+
+.core-services .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.cs-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cs-header .section-label {
+  margin-bottom: 12px;
+}
+
+/* ── Tab bar ── */
+.cs-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.cs-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-white);
+  color: var(--text-body);
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.cs-tab:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(0, 150, 225, 0.05);
+}
+.cs-tab--active {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 150, 225, 0.35);
+}
+.cs-tab--active:hover {
+  color: #fff;
+  background: var(--gradient);
+}
+
+.cs-tab-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-tab-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Body layout ── */
+.cs-body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Category list (left panel) ── */
+.cs-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-white);
+}
+
+.cs-cat-item {
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--text-body);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed var(--border-strong);
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.01em;
+}
+.cs-cat-item:last-child {
+  border-bottom: none;
+}
+.cs-cat-item:hover {
+  background: rgba(0, 150, 225, 0.05);
+  color: var(--primary);
+}
+.cs-cat-item--active {
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 600;
+}
+.cs-cat-item--active:hover {
+  color: #fff;
+  background: var(--gradient);
+}
+
+/* ── Tools panel (right panel) ── */
+.cs-tools {
+  border: 1.5px dashed #6abf4b;
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 24px;
+  align-items: center;
+  background: var(--bg-white);
+  min-height: 120px;
+  animation: cs-fade-in 0.3s ease;
+}
+
+@keyframes cs-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Individual tool icon ── */
+.cs-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  transition: transform var(--transition);
+}
+.cs-tool:hover {
+  transform: translateY(-4px);
+}
+.cs-tool img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.10));
+  transition: filter var(--transition);
+}
+.cs-tool:hover img {
+  filter: drop-shadow(0 4px 12px rgba(0, 150, 225, 0.28));
+}
+.cs-tool-name {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════
+   Responsive
+═══════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .cs-body {
+    grid-template-columns: 1fr;
+  }
+  .cs-categories {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: var(--radius-sm);
+  }
+  .cs-cat-item {
+    flex: 1 1 auto;
+    border-bottom: none;
+    border-right: 1.5px dashed var(--border-strong);
+    min-width: 120px;
+  }
+  .cs-cat-item:last-child {
+    border-right: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cs-tabs {
+    gap: 8px;
+  }
+  .cs-tab {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+  .cs-tools {
+    padding: 20px;
+    gap: 16px 18px;
+  }
+  .cs-tool img {
+    width: 42px;
+    height: 42px;
+  }
+  .cs-categories {
+    flex-direction: column;
+  }
+  .cs-cat-item {
+    border-right: none;
+    border-bottom: 1.5px dashed var(--border-strong);
+  }
+  .cs-cat-item:last-child {
+    border-bottom: none;
+  }
+}

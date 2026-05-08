@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════
+   Testimonials — infinite auto-scroll carousel
+═══════════════════════════════════════════════ */
+
+.testimonials {
+  background: var(--bg-white);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 110px;
+}
+
+/* subtle top radial glow */
+.testimonials::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 320px;
+  background: radial-gradient(ellipse, rgba(0, 150, 225, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Header ── */
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.testimonials-header .section-subtitle {
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════
+   Carousel
+═══════════════════════════════════════════════ */
+
+.t-carousel-outer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* extra vertical room so card shadows aren't clipped */
+  padding: 12px 0 20px;
+}
+
+/* left / right fade masks */
+.t-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 160px;
+  z-index: 2;
+  pointer-events: none;
+}
+.t-fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-white), transparent);
+}
+.t-fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-white), transparent);
+}
+
+/* ── Scrolling track ── */
+.t-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: t-scroll 36s linear infinite;
+}
+
+/* pause on hover */
+.t-carousel-outer:hover .t-track {
+  animation-play-state: paused;
+}
+
+/* 6 original cards × card-width(340px) + gap(24px) = 2184px per set */
+@keyframes t-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50%)); }
+}
+
+/* ═══════════════════════════════════════════════
+   Card
+═══════════════════════════════════════════════ */
+
+.t-card {
+  width: 340px;
+  flex-shrink: 0;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  cursor: default;
+  /* top gradient bar */
+  box-shadow: var(--shadow-xs);
+}
+.t-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.t-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
+}
+
+/* ── Quote icon ── */
+.t-quote-icon {
+  width: 28px;
+  height: 21px;
+  color: rgba(0, 150, 225, 0.15);
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── Stars ── */
+.t-stars {
+  display: flex;
+  gap: 3px;
+}
+.t-stars svg {
+  width: 15px;
+  height: 15px;
+  fill: var(--accent-yellow);
+}
+
+/* ── Quote text ── */
+.t-text {
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  font-style: italic;
+  flex: 1;
+}
+
+/* ── Author row ── */
+.t-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.t-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.04em;
+}
+
+.t-name {
+  font-family: 'Furore', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text);
+  letter-spacing: 0.03em;
+}
+.t-role {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* ═══════════════════════════════════════════════
+   Reduced motion — show static grid instead
+═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .t-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    padding: 0 28px;
+  }
+  .t-fade { display: none; }
+}
+
+/* ── Responsive card width on small screens ── */
+@media (max-width: 480px) {
+  .t-card { width: 280px; }
+}

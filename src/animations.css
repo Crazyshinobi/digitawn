@@ -1,0 +1,27 @@
+/* ─── Scroll-triggered reveal animations ─── */
+
+.anim {
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Initial hidden states */
+.anim-fade-up    { opacity: 0; transform: translateY(40px); }
+.anim-fade-left  { opacity: 0; transform: translateX(-40px); }
+.anim-fade-right { opacity: 0; transform: translateX(40px); }
+.anim-fade       { opacity: 0; transform: none; }
+.anim-scale      { opacity: 0; transform: scale(0.88); }
+
+/* Visible state — all variants resolve to same end state */
+.anim-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim { transition: none !important; }
+  .anim-fade-up, .anim-fade-left, .anim-fade-right,
+  .anim-fade, .anim-scale { opacity: 1; transform: none; }
+}
