@@ -3,32 +3,74 @@ import './Hero.css';
 import useCounter from '../hooks/useCounter';
 
 const metrics = [
-  { label: 'Lead Conversion', value: '87%', width: '87%' },
+  { label: 'Lead Conversion',   value: '87%', width: '87%' },
   { label: 'Client Growth Rate', value: '94%', width: '94%' },
-  { label: 'Campaign ROI', value: '76%', width: '76%' },
+  { label: 'Campaign ROI',       value: '76%', width: '76%' },
 ];
 
 const heroStats = [
   { target: 50, suffix: '+', label: 'Projects Delivered' },
-  { target: 30, suffix: '+', label: 'Happy Clients' },
-  { target: 98, suffix: '%', label: 'Satisfaction Rate' },
+  { target: 30, suffix: '+', label: 'Happy Clients'      },
+  { target: 98, suffix: '%', label: 'Satisfaction Rate'  },
 ];
 
-// Hero counters start after the hero entrance animation delay (~0.7s)
+const titlePhrases = [
+  'Digital Presence',
+  'Online Growth',
+  'Brand Identity',
+  'Lead Pipeline',
+  'Web Experience',
+];
+
+/* ── Animated counter ── */
 function HeroStat({ target, suffix, label, delay = 0 }) {
   const [started, setStarted] = React.useState(false);
   const count = useCounter(target, 1600, started);
-
   React.useEffect(() => {
     const t = setTimeout(() => setStarted(true), 900 + delay);
     return () => clearTimeout(t);
   }, [delay]);
-
   return (
     <div className="stat-item">
       <span className="stat-value gradient-text">{count}{suffix}</span>
       <span className="stat-label">{label}</span>
     </div>
+  );
+}
+
+/* ── Typewriter ── */
+function Typewriter({ words }) {
+  const [idx, setIdx]         = React.useState(0);
+  const [text, setText]       = React.useState('');
+  const [deleting, setDeleting] = React.useState(false);
+
+  React.useEffect(() => {
+    const word  = words[idx];
+    const speed = deleting ? 45 : 90;
+    const pause = 2000;
+
+    if (!deleting && text === word) {
+      const t = setTimeout(() => setDeleting(true), pause);
+      return () => clearTimeout(t);
+    }
+    if (deleting && text === '') {
+      setDeleting(false);
+      setIdx(i => (i + 1) % words.length);
+      return;
+    }
+    const t = setTimeout(() => {
+      setText(prev =>
+        deleting ? prev.slice(0, -1) : word.slice(0, prev.length + 1)
+      );
+    }, speed);
+    return () => clearTimeout(t);
+  }, [text, deleting, idx, words]);
+
+  return (
+    <span className="hero-tw gradient-text">
+      {text}
+      <span className="hero-tw-cursor" aria-hidden="true">|</span>
+    </span>
   );
 }
 
@@ -55,7 +97,7 @@ export default function Hero() {
 
           <h1 className="hero-title hero-anim hero-anim-2">
             We Grow Your <br />
-            <span className="gradient-text">Digital Presence</span>
+            <Typewriter words={titlePhrases} />
           </h1>
 
           <p className="hero-subtitle hero-anim hero-anim-3">
