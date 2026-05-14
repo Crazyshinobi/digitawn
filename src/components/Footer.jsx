@@ -1,4 +1,5 @@
 import logo from '../assets/logo.png';
+import logoDark from "../assets/log-dark-removebg-preview.png"
 import './Footer.css';
 
 const quickLinks = [
@@ -82,7 +83,7 @@ export default function Footer() {
 
         {/* ── Col 1: Brand ── */}
         <div className="footer-brand">
-          <img src={logo} alt="Digitawn Solutions" className="footer-logo" />
+          <img src={logoDark} alt="Digitawn Solutions" className="footer-logo" />
           <p className="footer-tagline">
             Digitawn — Empowering innovation and technology to forge a remarkable digital transformation.
           </p>
@@ -147,7 +148,7 @@ export default function Footer() {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
               </span>
-              <a href="mailto:hello@digitawn.com">hello@digitawn.com</a>
+              <a href="mailto:digitawn.solutions@gmail.com">digitawn.solutions@gmail.com</a>
             </li>
           </ul>
         </div>

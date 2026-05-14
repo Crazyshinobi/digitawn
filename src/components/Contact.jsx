@@ -24,7 +24,7 @@ export default function Contact() {
 
           <div className="contact-details">
             {[
-              { icon: '📧', label: 'Email', value: 'hello@digitawn.com', href: 'mailto:hello@digitawn.com' },
+              { icon: '📧', label: 'Email', value: 'digitawn.solutions@gmail.com', href: 'mailto:digitawn.solutions@gmail.com' },
               { icon: '📍', label: 'Location', value: 'Available Worldwide' },
               { icon: '⏱️', label: 'Response Time', value: 'Within 24 hours' },
             ].map((item, i) => (

@@ -55,13 +55,13 @@ export default function Navbar() {
         <div className="container topbar-inner">
           {/* left: contact info */}
           <div className="topbar-left">
-            <a href="mailto:hello@digitawn.com" className="topbar-item">
+            <a href="mailto:digitawn.solutions@gmail.com" className="topbar-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                 strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
-              hello@digitawn.com
+              digitawn.solutions@gmail.com
             </a>
             <span className="topbar-divider" aria-hidden="true" />
             <a href="tel:+917581822822" className="topbar-item">
