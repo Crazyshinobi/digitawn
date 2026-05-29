@@ -90,20 +90,22 @@ function TestimonialCard({ t }) {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({ showHeader = true }) {
   return (
     <section className="testimonials" id="testimonials">
-      <div className="container">
-        <Animate variant="fade-up" className="section-header testimonials-header">
-          <span className="section-label">Client Stories</span>
-          <h2 className="section-title">
-            What Our <span className="gradient-text">Clients Say</span>
-          </h2>
-          <p className="section-subtitle">
-            Real results from real businesses. Here's what our clients have to say about working with us.
-          </p>
-        </Animate>
-      </div>
+      {showHeader && (
+        <div className="container">
+          <Animate variant="fade-up" className="section-header testimonials-header">
+            <span className="section-label">Client Stories</span>
+            <h2 className="section-title">
+              What Our <span className="gradient-text">Clients Say</span>
+            </h2>
+            <p className="section-subtitle">
+              Real results from real businesses. Here's what our clients have to say about working with us.
+            </p>
+          </Animate>
+        </div>
+      )}
 
       {/* ── Carousel — full-width, outside container ── */}
       <div className="t-carousel-outer" aria-label="Client testimonials carousel">

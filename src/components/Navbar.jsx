@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import './Navbar.css';
 
-const navLinks = ['Home', 'Services', 'About', 'Contact'];
+const navLinks = [
+  { label: 'Home', path: '/' },
+  { label: 'Services', path: '/services' },
+  { label: 'About', path: '/about' },
+  { label: 'Work', path: '/work' },
+  { label: 'Blog', path: '/blog' },
+  { label: 'Contact', path: '/contact' },
+];
 
 const socials = [
   {
@@ -35,6 +43,7 @@ const socials = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -42,18 +51,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNav = (e, id) => {
-    e.preventDefault();
+  useEffect(() => {
     setMenuOpen(false);
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+  }, [location.pathname]);
+
+  const isActive = path => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
   return (
     <>
-      {/* ── Top bar ── */}
       <div className="topbar">
         <div className="container topbar-inner">
-          {/* left: contact info */}
           <div className="topbar-left">
             <a href="mailto:digitawn.solutions@gmail.com" className="topbar-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
@@ -72,8 +82,6 @@ export default function Navbar() {
               +91-7581 822 822
             </a>
           </div>
-
-          {/* right: social icons */}
           <div className="topbar-right">
             {socials.map(s => (
               <a key={s.label} href={s.href} aria-label={s.label} className="topbar-social">
@@ -84,25 +92,28 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ── Main navbar ── */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container navbar-inner">
-          <a href="#home" className="navbar-logo" onClick={e => handleNav(e, 'home')}>
+          <Link to="/" className="navbar-logo">
             <img src={logo} alt="Digitawn Solutions" />
-          </a>
+          </Link>
 
           <ul className={`navbar-links ${menuOpen ? 'open' : ''}`}>
             {navLinks.map(link => (
-              <li key={link}>
-                <a href={`#${link.toLowerCase()}`} onClick={e => handleNav(e, link)}>
-                  {link}
-                </a>
+              <li key={link.label}>
+                <Link
+                  to={link.path}
+                  className={isActive(link.path) ? 'active' : ''}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
             <li>
-              <a href="#contact" className="btn-primary nav-cta" onClick={e => handleNav(e, 'contact')}>
+              <Link to="/contact" className="btn-primary nav-cta" onClick={() => setMenuOpen(false)}>
                 Get Started
-              </a>
+              </Link>
             </li>
           </ul>
 

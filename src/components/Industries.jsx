@@ -89,24 +89,24 @@ const industries = [
   },
 ];
 
-export default function Industries() {
+export default function Industries({ showHeader = true }) {
   return (
     <section id="industries" className="industries">
-      {/* bg blobs */}
       <div className="ind-blob ind-blob--tl" aria-hidden="true" />
       <div className="ind-blob ind-blob--br" aria-hidden="true" />
 
       <div className="container">
-        {/* ── Header ── */}
-        <Animate variant="fade-up" className="section-header ind-header">
-          <span className="section-label">Our Working Industries</span>
-          <h2 className="section-title">
-            We're <span className="gradient-text">Everywhere</span>
-          </h2>
-          <p className="section-subtitle">
-            From e-commerce to healthcare, we deliver tailored digital solutions across every major industry.
-          </p>
-        </Animate>
+        {showHeader && (
+          <Animate variant="fade-up" className="section-header ind-header">
+            <span className="section-label">Our Working Industries</span>
+            <h2 className="section-title">
+              We're <span className="gradient-text">Everywhere</span>
+            </h2>
+            <p className="section-subtitle">
+              From e-commerce to healthcare, we deliver tailored digital solutions across every major industry.
+            </p>
+          </Animate>
+        )}
 
         {/* ── Grid ── */}
         <div className="ind-grid">

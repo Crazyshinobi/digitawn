@@ -1,0 +1,111 @@
+.home-teaser {
+  padding: 100px 0 60px;
+  background: var(--bg);
+}
+
+.home-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.home-teaser-card {
+  padding: 28px 24px;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.home-teaser-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-teaser-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-family: 'Furore', sans-serif;
+}
+
+.home-teaser-title {
+  font-size: 1.15rem;
+  margin: 10px 0 12px;
+  line-height: 1.35;
+}
+
+.home-teaser-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.65;
+}
+
+.home-teaser-link {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.home-services-preview {
+  padding: 60px 0 100px;
+  background: var(--bg-section);
+}
+
+.home-preview-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.home-preview-card {
+  padding: 32px 28px;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.home-preview-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 14px;
+}
+.home-preview-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.home-preview-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.65;
+}
+.home-preview-card a {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.88rem;
+}
+
+.home-preview-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 1000px) {
+  .home-teaser-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .home-teaser-grid,
+  .home-preview-grid {
+    grid-template-columns: 1fr;
+  }
+}

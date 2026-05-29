@@ -10,24 +10,87 @@ const values = [
   { icon: '🔒', title: 'Transparent', desc: 'Clear communication, honest timelines, no surprises.' },
 ];
 
-// target: numeric value | suffix: text appended after the number
 const stats = [
-  { target: 50,  suffix: '+', label: 'Projects Delivered' },
-  { target: 30,  suffix: '+', label: 'Happy Clients' },
-  { target: 98,  suffix: '%', label: 'Retention Rate' },
-  { target: 5,   suffix: '★', label: 'Average Rating' },
+  {
+    target: 50,
+    suffix: '+',
+    label: 'Projects Delivered',
+    hint: 'Web, apps & campaigns shipped',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
+  },
+  {
+    target: 30,
+    suffix: '+',
+    label: 'Happy Clients',
+    hint: 'Startups & growing brands',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+  {
+    target: 98,
+    suffix: '%',
+    label: 'Client Retention',
+    hint: 'Long-term partnerships',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+        <polyline points="17 6 23 6 23 12" />
+      </svg>
+    ),
+  },
+  {
+    target: 5,
+    suffix: '',
+    label: 'Average Rating',
+    hint: 'Based on client feedback',
+    isRating: true,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      </svg>
+    ),
+  },
 ];
 
-// Individual animated counter item
-function StatItem({ target, suffix, label, active }) {
-  const count = useCounter(target, 1800, active);
+function StatCard({ stat, active, index }) {
+  const count = useCounter(stat.target, 1800, active);
+
   return (
-    <div className="strip-item">
-      <span className="strip-value">
-        {count}{suffix}
-      </span>
-      <span className="strip-label">{label}</span>
-    </div>
+    <article className="about-stat-card" style={{ '--stat-i': index }}>
+      <div className="about-stat-icon">{stat.icon}</div>
+      <div className="about-stat-body">
+        {stat.isRating ? (
+          <div className="about-stat-value-row">
+            <span className="about-stat-value gradient-text">{count}</span>
+            <span className="about-stat-rating-stars" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg key={i} viewBox="0 0 24 24" className={i < Math.round(count) ? 'filled' : ''}>
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </span>
+          </div>
+        ) : (
+          <span className="about-stat-value gradient-text">
+            {count}{stat.suffix}
+          </span>
+        )}
+        <h3 className="about-stat-label">{stat.label}</h3>
+        <p className="about-stat-hint">{stat.hint}</p>
+      </div>
+      <div className="about-stat-accent" aria-hidden="true" />
+    </article>
   );
 }
 
@@ -83,17 +146,15 @@ export default function About() {
           </Animate>
         </div>
 
-        {/* Stats strip with counter animation */}
-        <div ref={stripRef} className={`anim anim-fade-up about-strip-wrapper ${stripInView ? 'anim-visible' : ''}`}>
-          <div className="about-strip">
-            {stats.map(s => (
-              <StatItem
-                key={s.label}
-                target={s.target}
-                suffix={s.suffix}
-                label={s.label}
-                active={stripInView}
-              />
+        <div ref={stripRef} className={`about-stats-section ${stripInView ? 'about-stats-section--visible' : ''}`}>
+          <div className="about-stats-header">
+            <span className="section-label">Our Impact</span>
+            <h3 className="about-stats-title">Numbers That <span className="gradient-text">Back Our Work</span></h3>
+            <p className="about-stats-sub">Real outcomes from projects we&apos;ve delivered for clients worldwide.</p>
+          </div>
+          <div className="about-stats-grid">
+            {stats.map((s, i) => (
+              <StatCard key={s.label} stat={s} active={stripInView} index={i} />
             ))}
           </div>
         </div>

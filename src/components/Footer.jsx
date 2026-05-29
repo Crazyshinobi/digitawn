@@ -1,20 +1,25 @@
-import logo from '../assets/logo.png';
-import logoDark from "../assets/log-dark-removebg-preview.png"
+import { Link } from 'react-router-dom';
+import logoDark from '../assets/log-dark-removebg-preview.png';
 import './Footer.css';
 
 const quickLinks = [
-  { label: 'Home',         href: '#home' },
-  { label: 'About Us',     href: '#about' },
-  { label: 'Services',     href: '#services' },
-  { label: 'Our Work',     href: '#work' },
-  { label: 'Contact Us',   href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Our Work', to: '/work' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Contact Us', to: '/contact' },
 ];
 
 const usefulLinks = [
-  { label: "FAQ's",                 href: '#' },
-  { label: 'Terms & Conditions',    href: '#' },
-  { label: 'Privacy Policy',        href: '#' },
-  { label: 'Refund & Cancellation', href: '#' },
+  { label: 'FAQ', to: '/faq' },
+  { label: 'Our Process', to: '/process' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Testimonials', to: '/testimonials' },
+  { label: 'Careers', to: '/careers' },
+  { label: 'Terms & Conditions', to: '/terms' },
+  { label: 'Privacy Policy', to: '/privacy-policy' },
+  { label: 'Refund & Cancellation', to: '/refund-policy' },
 ];
 
 const socials = [
@@ -75,15 +80,14 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      {/* decorative orbs */}
       <div className="footer-orb footer-orb--tl" aria-hidden="true" />
       <div className="footer-orb footer-orb--br" aria-hidden="true" />
 
       <div className="container footer-inner">
-
-        {/* ── Col 1: Brand ── */}
         <div className="footer-brand">
-          <img src={logoDark} alt="Digitawn Solutions" className="footer-logo" />
+          <Link to="/">
+            <img src={logoDark} alt="Digitawn Solutions" className="footer-logo" />
+          </Link>
           <p className="footer-tagline">
             Digitawn — Empowering innovation and technology to forge a remarkable digital transformation.
           </p>
@@ -96,31 +100,28 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Col 2: Quick Links ── */}
         <div className="footer-col">
           <h4 className="footer-heading">Quick Links</h4>
           <ul>
             {quickLinks.map(l => (
               <li key={l.label}>
-                <a href={l.href}>{l.label}</a>
+                <Link to={l.to}>{l.label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* ── Col 3: Useful Links ── */}
         <div className="footer-col">
-          <h4 className="footer-heading">UseFul Links</h4>
+          <h4 className="footer-heading">Useful Links</h4>
           <ul>
             {usefulLinks.map(l => (
               <li key={l.label}>
-                <a href={l.href}>{l.label}</a>
+                <Link to={l.to}>{l.label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* ── Col 4: Contact ── */}
         <div className="footer-col footer-contact">
           <h4 className="footer-heading">Contact Us</h4>
           <ul>
@@ -152,15 +153,13 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-
       </div>
 
-      {/* ── Bottom bar ── */}
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
           <p>
             © {year} <strong>Digitawn Solutions</strong>. All Rights Reserved. Powered By{' '}
-            <a href="#" className="footer-bottom-link">Digitawn Solutions</a>
+            <Link to="/" className="footer-bottom-link">Digitawn Solutions</Link>
           </p>
         </div>
       </div>
