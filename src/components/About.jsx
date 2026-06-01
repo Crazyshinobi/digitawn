@@ -2,6 +2,8 @@ import './About.css';
 import Animate from './Animate';
 import useInView from '../hooks/useInView';
 import useCounter from '../hooks/useCounter';
+import aboutUsImg from '../assets/67ed4fc14d11dabout-us.svg';
+import image1 from '../assets/image1.png';
 
 const values = [
   { icon: '🚀', title: 'Results First', desc: 'Every strategy we build is tied to measurable outcomes.' },
@@ -102,8 +104,13 @@ export default function About() {
       <div className="container">
         <div className="about-inner">
           <Animate variant="fade-left" className="about-visual">
-            <div className="about-card-stack">
+            <div className="about-illustration-wrap">
               <div className="about-blob" />
+              <img
+                src={aboutUsImg}
+                alt="About Digitawn – digital agency illustration"
+                className="about-illustration"
+              />
               <div className="about-card ac1">
                 <div className="ac-icon-wrap">🎯</div>
                 <div><p className="ac-title">Lead Generation</p><p className="ac-sub">+240% avg. growth</p></div>
@@ -112,9 +119,8 @@ export default function About() {
                 <div className="ac-icon-wrap">📱</div>
                 <div><p className="ac-title">Apps Launched</p><p className="ac-sub">20+ live products</p></div>
               </div>
-              <div className="about-card ac3">
-                <div className="ac-icon-wrap">⭐</div>
-                <div><p className="ac-title">Client Satisfaction</p><p className="ac-sub">98% retention rate</p></div>
+              <div className="about-badge-img">
+                <img src={image1} alt="Digitawn certified partner badge" />
               </div>
             </div>
           </Animate>
